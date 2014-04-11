@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">温泉検索（エリア）</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_detail">温泉一覧</string>
+    <string name="title_activity_content">温泉詳細</string>
+    <string name="label_onsenName">温泉名</string>
+    <string name="label_onsenAddress">住所</string>
+    <string name="label_natureOfOnsen">泉質</string>
+    <string name="label_onsenAreaNameOnsenAreaURL">リンク</string>
+    <string name="label_onsenAreaCaption">説明</string>
+    <string name="map_button">地図</string>
+    <string name="title_activity_onsen_map">OnsenMapActivity</string>
+    <string name="hello_world">Hello world!</string>
+
+</resources>
