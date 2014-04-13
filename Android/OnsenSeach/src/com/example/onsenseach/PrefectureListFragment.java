@@ -17,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class PrefectureListFragment extends ListFragment implements LoaderCallbacks<List>{
-
 	public PrefectureListFragment() {
 		Log.d("PrefectureListFragment", "constractor");
 		// TODO 自動生成されたコンストラクター・スタブ
@@ -54,7 +53,8 @@ public class PrefectureListFragment extends ListFragment implements LoaderCallba
 		Log.d("onLoadFinished", "start");
 		//位置情報の取得
 		ArrayAdapter<Prefecture> list = new ArrayAdapter<Prefecture>(getActivity(), android.R.layout.simple_list_item_1);
-		if(result == null) {
+
+				if(result == null) {
 			Log.d("onLoadFinished", "result is null");
 		} else {
 			Iterator ite = result.iterator();
