@@ -1,7 +1,5 @@
 package com.example.onsenseach;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +11,8 @@ import android.content.Loader;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 public class DetailListFragment extends ListFragment implements LoaderCallbacks<List>{
 
@@ -61,7 +59,8 @@ public class DetailListFragment extends ListFragment implements LoaderCallbacks<
 	public void onLoadFinished(Loader<List> loader, List result) {
 		// TODO 自動生成されたメソッド・スタブ
 		Log.d("DetailListFragment", "onLoadFinished");
-		//位置情報の取得
+		//表示形式の変更(android.R.layout.simple_list_item_1 → android.R.layout.simple_list_item_2)
+		/*		//位置情報の取得
 		ArrayAdapter<OnsenDetail> list = new ArrayAdapter<OnsenDetail>(getActivity(), android.R.layout.simple_list_item_1);
 		if(result == null) {
 			Log.d("DetailListFragment", "result is null");
@@ -74,12 +73,14 @@ public class DetailListFragment extends ListFragment implements LoaderCallbacks<
 				map_result = (Map) obj;
 				Log.d("onLoadFinished", (String)map_result.get("onsenName"));
 				Log.d("onLoadFinished", (String)map_result.get("onsenID"));
+				Log.d("onLoadFinished", (String)map_result.get("largeArea"));
 				Log.d("onLoadFinished", (String)map_result.get("onsenAddress"));
 				Log.d("onLoadFinished", (String)map_result.get("natureOfOnsen"));
 				Log.d("onLoadFinished", (String)map_result.get("onsenAreaNameOnsenAreaURL"));
 				Log.d("onLoadFinished", (String)map_result.get("onsenAreaCaption"));
 				list.add(new OnsenDetail((String)map_result.get("onsenName"),
 						                 (String)map_result.get("onsenID"),
+						                 (String)map_result.get("largeArea"),
 						                 (String)map_result.get("onsenAddress"),
 						                 (String)map_result.get("natureOfOnsen"),
 						                 (String)map_result.get("onsenAreaNameOnsenAreaURL"),
@@ -88,6 +89,20 @@ public class DetailListFragment extends ListFragment implements LoaderCallbacks<
 		}
 		//リスト登録
 		setListAdapter(list);
+*/
+
+        // ListView に設定するデータ (アダプタ) を生成する (テキスト 2 行表示リスト)
+        SimpleAdapter adapter = new SimpleAdapter(
+                getActivity(),
+                result,
+                android.R.layout.simple_list_item_2,
+                new String[] {"onsenName", "largeArea"},
+                new int[] {android.R.id.text1, android.R.id.text2}
+                );
+
+        // リストビューにデータ (アダプタ) を追加
+        setListAdapter(adapter);
+
 	}
 
 	@Override
@@ -99,22 +114,40 @@ public class DetailListFragment extends ListFragment implements LoaderCallbacks<
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		//画面遷移
-		ArrayAdapter<OnsenDetail> list = (ArrayAdapter<OnsenDetail>) getListAdapter();
-		OnsenDetail detail = list.getItem(position);
-		Log.d("onListItemClick", detail.getOnsenName());
-		Log.d("onListItemClick", detail.getOnsenAddress());
-		Log.d("onListItemClick", detail.getNature());
-		Log.d("onListItemClick", detail.getAreaURL());
-		Log.d("onListItemClick", detail.getCaption());
-
+		//表示形式の変更(android.R.layout.simple_list_item_1 → android.R.layout.simple_list_item_2)
+		/*		ArrayAdapter<OnsenDetail> list = (ArrayAdapter<OnsenDetail>) getListAdapter();
+		Iterator ite = result.iterator();
+		Log.d("onLoadFinished", "while start");
 		//引数用意
 		Bundle args = new Bundle();
-		args.putString("onsenName",    detail.getOnsenName());
-		args.putString("onsenAddress", detail.getOnsenAddress());
-		args.putString("natureOfOnsen", detail.getNature());
-		args.putString("onsenAreaNameOnsenAreaURL", detail.getAreaURL());
-		args.putString("onsenAreaCaption", detail.getCaption());
+		Map map_result = new HashMap();
+		while(ite.hasNext()) {
+			Object obj = ite.next();
+			map_result = (Map) obj;
+			Log.d("onLoadFinished", (String)map_result.get("onsenName"));
+			Log.d("onLoadFinished", (String)map_result.get("onsenID"));
+			Log.d("onLoadFinished", (String)map_result.get("largeArea"));
+			Log.d("onLoadFinished", (String)map_result.get("onsenAddress"));
+			Log.d("onLoadFinished", (String)map_result.get("natureOfOnsen"));
+			Log.d("onLoadFinished", (String)map_result.get("onsenAreaNameOnsenAreaURL"));
+			Log.d("onLoadFinished", (String)map_result.get("onsenAreaCaption"));
+			args.putString("onsenName",(String)map_result.get("onsenName"));
+			args.putString("onsenAddress",(String)map_result.get("onsenAddress"));
+			args.putString("natureOfOnsen", (String)map_result.get("natureOfOnsen"));
+			args.putString("onsenAreaNameOnsenAreaURL",(String)map_result.get("onsenAreaNameOnsenAreaURL"));
+			args.putString("onsenAreaCaption", (String)map_result.get("onsenAreaCaption"));
+		}
+*/
 
+
+		SimpleAdapter adapter = (SimpleAdapter) getListAdapter();
+		Map map_result = (Map) adapter.getItem(position);
+		Bundle args = new Bundle();
+		args.putString("onsenName",(String)map_result.get("onsenName"));
+		args.putString("onsenAddress",(String)map_result.get("onsenAddress"));
+		args.putString("natureOfOnsen", (String)map_result.get("natureOfOnsen"));
+		args.putString("onsenAreaNameOnsenAreaURL",(String)map_result.get("onsenAreaNameOnsenAreaURL"));
+		args.putString("onsenAreaCaption", (String)map_result.get("onsenAreaCaption"));
 		Intent intent = new Intent(getActivity(), ContentActivity.class);
 		intent.putExtras(args);
 		startActivity(intent);

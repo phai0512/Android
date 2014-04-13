@@ -6,6 +6,8 @@ public class OnsenDetail {
 
 	private String onsenID;
 
+	private String onsenLargeArea;
+
 	private String onsenAddress;
 
 	private String natureOfOnsen;
@@ -14,10 +16,11 @@ public class OnsenDetail {
 
 	private String onsenAreaCaption;
 
-	public OnsenDetail(String name, String id, String address, String nature, String areaurl, String caption) {
+	public OnsenDetail(String name, String id, String area, String address, String nature, String areaurl, String caption) {
 		super();
 		this.onsenName = name;
 		this.onsenID = id;
+		this.onsenLargeArea = area;
 		this.onsenAddress = address;
 		this.natureOfOnsen = nature;
 		this.onsenAreaNameOnsenAreaURL = areaurl;
@@ -39,6 +42,15 @@ public class OnsenDetail {
 	public String getOnsenID() {
 		return onsenID;
 	}
+
+	/*
+	 * 温泉のコードを取得
+	 * @return 温泉コード
+	 */
+	public String getOnsenLargeArea() {
+		return onsenLargeArea;
+	}
+
 	/*
 	 * 温泉の住所を取得
 	 * @return 住所
@@ -75,6 +87,6 @@ public class OnsenDetail {
 	 * @return 都道府県名
 	 */
 	public String toString() {
-		return onsenName;
+		return onsenName + "  <" + onsenLargeArea + ">";
 	}
 }

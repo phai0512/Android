@@ -53,6 +53,7 @@ public class OnsenDetailAPILoader extends AsyncTaskLoader<List> {
 		    int eventType;
 		    String onsenName = "";
 		    String onsenID = "";
+		    String onsenLargeArea = "";
 		    String onsenAddress = "";
 		    String natureOfOnsen = "";
 		    String onsenAreaNameOnsenAreaURL = "";
@@ -65,6 +66,9 @@ public class OnsenDetailAPILoader extends AsyncTaskLoader<List> {
 		        } else if(eventType == XmlPullParser.START_TAG && "OnsenID".equals(xmlPullParser.getName())) {
 		            onsenID = xmlPullParser.nextText();
 		        	Log.d("XmlPullParserSampleUrl", onsenID);
+		        } else if(eventType == XmlPullParser.START_TAG && "LargeArea".equals(xmlPullParser.getName())) {
+		        	onsenLargeArea = xmlPullParser.nextText();
+		        	Log.d("XmlPullParserSampleUrl", onsenLargeArea);
 		        } else if(eventType == XmlPullParser.START_TAG && "OnsenAddress".equals(xmlPullParser.getName())) {
 		            onsenAddress = xmlPullParser.nextText();
 		        	Log.d("XmlPullParserSampleUrl", onsenAddress);
@@ -80,6 +84,7 @@ public class OnsenDetailAPILoader extends AsyncTaskLoader<List> {
 				    Map map = new HashMap();
 		            map.put("onsenName", onsenName);
 		            map.put("onsenID", onsenID);
+		            map.put("largeArea", onsenLargeArea);
 		            map.put("onsenAddress", onsenAddress);
 		            map.put("natureOfOnsen", natureOfOnsen);
 		            map.put("onsenAreaNameOnsenAreaURL", onsenAreaNameOnsenAreaURL);
