@@ -8,8 +8,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
+
+import com.androidquery.AQuery;
 
 public class ContentActivity extends Activity implements OnClickListener {
 
@@ -21,12 +22,12 @@ public class ContentActivity extends Activity implements OnClickListener {
 
 		//選択された詳細値の設定
 		Intent intent = getIntent();
-		TextView onsenName = (TextView) findViewById(R.id.text_onsenName);
+/*		TextView onsenName = (TextView) findViewById(R.id.text_onsenName);
 		TextView onsenAddress = (TextView) findViewById(R.id.text_onsenAddress);
 		TextView natureOfOnsen = (TextView) findViewById(R.id.text_natureOfOnsen);
 		TextView onsenAreaNameOnsenAreaURL = (TextView) findViewById(R.id.text_onsenAreaNameOnsenAreaURL);
 		TextView onsenAreaCaption = (TextView) findViewById(R.id.text_onsenAreaCaption);
-		
+
 		//view設定
 		onsenName.setText(intent.getStringExtra("onsenName"));
 		onsenAddress.setText(intent.getStringExtra("onsenAddress"));
@@ -38,7 +39,16 @@ public class ContentActivity extends Activity implements OnClickListener {
 		//イベントハンドラの設定
 		Button button_map = (Button) findViewById(R.id.button_map);
 		button_map.setOnClickListener(this);
-
+*/
+		AQuery aq = new AQuery(this);
+		aq.id(R.id.text_onsenName).text(intent.getStringExtra("onsenName"));
+		aq.id(R.id.text_onsenAddress).text(intent.getStringExtra("onsenAddress"));
+		aq.id(R.id.text_natureOfOnsen).text(intent.getStringExtra("natureOfOnsen"));
+		aq.id(R.id.text_onsenAreaCaption).text(intent.getStringExtra("onsenAreaCaption"));
+		aq.id(R.id.text_onsenName).text(intent.getStringExtra("onsenName"));
+		aq.id(R.id.button_map).clicked(this, "onClick");
+		TextView onsenAreaNameOnsenAreaURL = (TextView) findViewById(R.id.text_onsenAreaNameOnsenAreaURL);
+		Linkify.addLinks(onsenAreaNameOnsenAreaURL, Linkify.ALL);
 	}
 
 	@Override

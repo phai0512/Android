@@ -48,7 +48,7 @@ public class OnsenAPILoader extends AsyncTaskLoader<List> {
 			if(cashefile.exists()) {
 				Log.d("loadInBackground", "cashefile.exists()1");
 				calendar.setTime(new Date(cashefile.lastModified()));
-				calendar.add(Calendar.DATE, 1);
+				calendar.add(Calendar.HOUR, 1);
 			}
 			String prefecture;
 		    XmlPullParser xmlPullParser = Xml.newPullParser();
