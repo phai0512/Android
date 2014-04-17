@@ -26,7 +26,8 @@ public class ContentActivity extends Activity implements OnClickListener {
 		TextView natureOfOnsen = (TextView) findViewById(R.id.text_natureOfOnsen);
 		TextView onsenAreaNameOnsenAreaURL = (TextView) findViewById(R.id.text_onsenAreaNameOnsenAreaURL);
 		TextView onsenAreaCaption = (TextView) findViewById(R.id.text_onsenAreaCaption);
-
+		
+		//view設定
 		onsenName.setText(intent.getStringExtra("onsenName"));
 		onsenAddress.setText(intent.getStringExtra("onsenAddress"));
 		natureOfOnsen.setText(intent.getStringExtra("natureOfOnsen"));
