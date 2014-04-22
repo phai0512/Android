@@ -34,4 +34,9 @@ public class OnsenMapActivity extends Activity {
 		return true;
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+	}
+
 }
